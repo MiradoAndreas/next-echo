@@ -11,8 +11,7 @@ export default function Page() {
   return (
     <div className="flex flex-col items-center justify-center min-h-svh p-6">
       <p>apps/widget</p>
-      <Button onClick={() => addUser}>Add User Mirado</Button>
-      <div className="max-w-sm w-full mx-auto">
+      <Button onClick={() => addUser()}>Add User Mirado</Button>      <div className="max-w-sm w-full mx-auto">
         {JSON.stringify(users, null, 2)}
       </div>
     </div>

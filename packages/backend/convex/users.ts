@@ -17,9 +17,19 @@ export const add = mutation({
       throw new Error("Not authenticated")
     }
 
+    console.log("IDENTITY JSON", JSON.stringify(identity, null, 2))
+
+    const orgId = identity?.orgId as string
+
+    if (orgId === null) {
+      return null
+    }
+
     const userId = await ctx.db.insert("users", {
       name: "Mirado",
     })
+
+    console.log("Tu as réussi à débugger cette fonction")
 
     return userId
   },

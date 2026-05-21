@@ -25,7 +25,11 @@ export default function RootLayout({
     >
       <body>
         <ClerkProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+
+            {children}
+
+          </ThemeProvider>
         </ClerkProvider>
       </body>
     </html>

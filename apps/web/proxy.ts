@@ -10,7 +10,7 @@ const isPublicRoute = createRouteMatcher([
 const isOrgFreeRoute = createRouteMatcher([
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/org-select(.*)",
+  "/org-selection(.*)",
 ])
 
 export default clerkMiddleware(async (auth, req) => {
@@ -23,7 +23,7 @@ export default clerkMiddleware(async (auth, req) => {
       redirectUrl: req.url,
     })
     const orgSelection = new URL(
-      `/org-select?${searchParams.toString()}`,
+      `/org-selection?${searchParams.toString()}`,
       req.url
     )
     return NextResponse.redirect(orgSelection)

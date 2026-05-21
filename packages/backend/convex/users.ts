@@ -17,13 +17,13 @@ export const add = mutation({
       throw new Error("Not authenticated")
     }
 
-    console.log("IDENTITY JSON", JSON.stringify(identity, null, 2))
-
     const orgId = identity?.orgId as string
 
-    if (orgId === null) {
-      return null
+    if (!orgId) {
+      throw new Error("Missing organization")
     }
+
+    throw new Error("Tracking test")
 
     const userId = await ctx.db.insert("users", {
       name: "Mirado",

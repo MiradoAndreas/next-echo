@@ -5,6 +5,7 @@ import { api } from "@workspace/backend/_generated/api"
 import { Button } from "@workspace/ui/components/button"
 
 import { OrganizationSwitcher, SignInButton, SignOutButton, UserButton } from "@clerk/nextjs"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export default function Page() {
 
@@ -18,7 +19,7 @@ export default function Page() {
 
 
       <div className="flex flex-col items-center justify-center min-h-svh p-6 space-y-3">
-
+        <ModeToggle />
         <p>apps/web</p>
         <UserButton />
         <OrganizationSwitcher hidePersonal={true} />

@@ -14,6 +14,7 @@ import {
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail } from "@workspace/ui/components/sidebar"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { cn } from "@workspace/ui/lib/utils"
 
 const customerSupportItems = [
   {
@@ -101,6 +102,9 @@ export const DashboardSidebar = () => {
                     asChild
                     isActive={isActive(item.url)}
                     tooltip={item.title}
+                    className={cn(
+                      isActive(item.url) && "bg-linear-to-b from-sidebar-primary to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]/90"
+                    )}
                   >
                     <Link href={item.url}>
                       <item.icon className="size-4" />
@@ -124,6 +128,9 @@ export const DashboardSidebar = () => {
                     asChild
                     isActive={isActive(item.url)}
                     tooltip={item.title}
+                    className={cn(
+                      isActive(item.url) && "bg-linear-to-b from-sidebar-primary to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]/90"
+                    )}
                   >
                     <Link href={item.url}>
                       <item.icon className="size-4" />
@@ -147,6 +154,9 @@ export const DashboardSidebar = () => {
                     asChild
                     isActive={isActive(item.url)}
                     tooltip={item.title}
+                    className={cn(
+                      isActive(item.url) && "bg-linear-to-b from-sidebar-primary to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]/90"
+                    )}
                   >
                     <Link href={item.url}>
                       <item.icon className="size-4" />

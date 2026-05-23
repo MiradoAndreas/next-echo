@@ -1,5 +1,5 @@
-import { AuthGuard } from "@/modules/auth/ui/components/auth-guard"
-import { OrganizationGuard } from "@/modules/auth/ui/components/organization-guard"
+
+import { DashboardLayout } from "@/modules/dashboard/ui/layouts/dashboard-layout"
 
 interface Props {
   children: React.ReactNode
@@ -7,12 +7,9 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <AuthGuard>
-      <OrganizationGuard>
-
-        {children}
-      </OrganizationGuard>
-    </AuthGuard>
+    <DashboardLayout>
+      {children}
+    </DashboardLayout>
   )
 }
 

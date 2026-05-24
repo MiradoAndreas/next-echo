@@ -15,9 +15,6 @@ export default function Page() {
   )
   return (
     <>
-
-
-
       <div className="flex flex-col items-center justify-center min-h-svh p-6 space-y-3">
         <ModeToggle />
         <p>apps/web</p>

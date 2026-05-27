@@ -7,6 +7,7 @@ import { MessageSquareTextIcon } from "lucide-react"
 import { useMutation } from "convex/react"
 import { api } from "@workspace/backend/_generated/api"
 import { useState } from "react"
+import { WidgetFooter } from "../components/widget-footer"
 
 export const WdigetSelectionScreen = () => {
   const setScreen = useSetAtom(screenAtom)
@@ -71,6 +72,7 @@ export const WdigetSelectionScreen = () => {
           </div>
         </Button>
       </div>
+      <WidgetFooter />
     </>
   )
 }

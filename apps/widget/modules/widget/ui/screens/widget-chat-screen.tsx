@@ -19,8 +19,11 @@ import { AIInput, AIInputSubmit, AIInputTextarea, AIInputToolbar, AIInputTools }
 import { AIMessage, AIMessageContent } from "@workspace/ui/components/ai/message"
 import { AIResponse } from "@workspace/ui/components/ai/response"
 import { AISuggestion, AISuggestions } from "@workspace/ui/components/ai/suggestion"
+import { useInfiniteScroll } from "@workspace/ui/hooks/use-infiinite-scroll"
+import { InfiniteScrollTrigger } from "@workspace/ui/components/infinite-scroll-trigger"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@workspace/ui/components/field"
 import { Input } from "@workspace/ui/components/input"
+import { DicebearAvatar } from "@workspace/ui/components/dicebar-avatar"
 
 const formSchema = z.object({
   message: z.string().min(1, "Message is required")
@@ -53,6 +56,19 @@ export const WidgetChatScreen = () => {
     } : "skip",
     { initialNumItems: 10 }
   )
+
+  const {
+    topElementRef,
+    handleLoadMore,
+    canLoadMore,
+    isLoadingMore,
+
+  } = useInfiniteScroll({
+    status: messages.status,
+    loadMore: messages.loadMore,
+    loadSize: 10,
+    observerEnabled: true
+  })
 
 
   // Formulaire
@@ -87,6 +103,7 @@ export const WidgetChatScreen = () => {
     <>
       <WidgetHeader className="flex items-center justify-between">
         <div className="flex items-center gap-x-2 gap-y-2 py-6">
+
           <Button size="icon" variant="transparent" onClick={onBack}>
             <ArrowLeftIcon />
           </Button>
@@ -100,7 +117,7 @@ export const WidgetChatScreen = () => {
       </Button>
       <AIConversation>
         <AIConversationContent>
-
+          <InfiniteScrollTrigger canLoadMore={canLoadMore} isLoadingMore={isLoadingMore} onLoadMore={handleLoadMore} ref={topElementRef} />
           {toUIMessages(messages.results ?? [])?.map((message) => {
             return (
               <AIMessage
@@ -110,13 +127,13 @@ export const WidgetChatScreen = () => {
                 <AIMessageContent>
                   <AIResponse>{message.text}</AIResponse>
                 </AIMessageContent>
-                {/* {message.role === "assistant" && (
+                {message.role === "assistant" && (
                   <DicebearAvatar
                     imageUrl="/logo.svg"
                     seed="assistant"
                     size={32}
                   />
-                )} */}
+                )}
                 {/** TODO: Add Avatar */}
               </AIMessage>
             )
@@ -135,7 +152,6 @@ export const WidgetChatScreen = () => {
                   e.preventDefault()
                   form.handleSubmit(onSubmit)
                 }
-
               }}
                 placeholder={conversation?.status === "resolved" ? "Conversation resolved" : "Ask me anything..."} value={field.value} />
 

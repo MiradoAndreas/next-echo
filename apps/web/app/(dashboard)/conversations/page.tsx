@@ -2,7 +2,7 @@
 const Page = () => {
   return (
     <div>
-      Hello I&apos;m Page Conversations
+      Hello Conversations !
     </div>
   )
 }

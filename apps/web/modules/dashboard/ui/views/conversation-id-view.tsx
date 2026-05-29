@@ -80,22 +80,22 @@ export const ConversationIdView = ({
   });
 
   const [isEnhancing, setIsEnhancing] = useState(false);
-  // const enhanceResponse = useAction(api.private.messages.enhanceResponse);
-  // const handleEnhanceResponse = async () => {
-  //   setIsEnhancing(true);
-  //   const currentValue = form.getValues("message");
+  const enhanceResponse = useAction(api.private.messages.enhanceResponse);
+  const handleEnhanceResponse = async () => {
+    setIsEnhancing(true);
+    const currentValue = form.getValues("message");
 
-  //   try {
-  //     const response = await enhanceResponse({ prompt: currentValue });
+    try {
+      const response = await enhanceResponse({ prompt: currentValue });
 
-  //     form.setValue("message", response);
-  //   } catch (error) {
-  //     toast.error("Something went wrong");
-  //     console.error(error);
-  //   } finally {
-  //     setIsEnhancing(false);
-  //   }
-  // }
+      form.setValue("message", response);
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.error(error);
+    } finally {
+      setIsEnhancing(false);
+    }
+  }
 
   const createMessage = useMutation(api.private.messages.create);
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -224,7 +224,7 @@ export const ConversationIdView = ({
           <AIInputToolbar>
             <AIInputTools>
               <AIInputButton
-                onClick={() => { }}
+                onClick={handleEnhanceResponse}
                 disabled={
                   conversation?.status === "resolved" ||
                   isEnhancing ||

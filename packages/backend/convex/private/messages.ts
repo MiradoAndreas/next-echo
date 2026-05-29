@@ -6,62 +6,62 @@ import { supportAgent } from "../system/ai/agents/supportAgent"
 import { paginationOptsValidator } from "convex/server"
 import { saveMessage } from "@convex-dev/agent"
 import { openai } from "@ai-sdk/openai"
-// import { OPERATOR_MESSAGE_ENHANCEMENT_PROMPT } from "../system/ai/constants";
+import { OPERATOR_MESSAGE_ENHANCEMENT_PROMPT } from "../system/ai/constants"
 
-// export const enhanceResponse = action({
-//   args: {
-//     prompt: v.string(),
-//   },
-//   handler: async (ctx, args) => {
-//     const identity = await ctx.auth.getUserIdentity();
+export const enhanceResponse = action({
+  args: {
+    prompt: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity()
 
-//     if (identity === null) {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Identity not found",
-//       });
-//     }
+    if (identity === null) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Identity not found",
+      })
+    }
 
-//     const orgId = identity.orgId as string;
+    const orgId = (identity.o as any)?.id
 
-//     if (!orgId) {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Organization not found",
-//       });
-//     }
+    if (!orgId) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Organization not found",
+      })
+    }
 
-//     const subscription = await ctx.runQuery(
-//       internal.system.subscriptions.getByOrganizationId,
-//       {
-//         organizationId: orgId,
-//       },
-//     );
+    // const subscription = await ctx.runQuery(
+    //   internal.system.subscriptions.getByOrganizationId,
+    //   {
+    //     organizationId: orgId,
+    //   }
+    // )
 
-//     if (subscription?.status !== "active") {
-//       throw new ConvexError({
-//         code: "BAD_REQUEST",
-//         message: "Missing subscription"
-//       });
-//     }
+    // if (subscription?.status !== "active") {
+    //   throw new ConvexError({
+    //     code: "BAD_REQUEST",
+    //     message: "Missing subscription",
+    //   })
+    // }
 
-//     const response = await generateText({
-//       model: openai("gpt-4o-mini"),
-//       messages: [
-//         {
-//           role: "system",
-//           content: OPERATOR_MESSAGE_ENHANCEMENT_PROMPT,
-//         },
-//         {
-//           role: "user",
-//           content: args.prompt,
-//         },
-//       ],
-//     });
+    const response = await generateText({
+      model: openai("gpt-5-nano"),
+      messages: [
+        {
+          role: "system",
+          content: OPERATOR_MESSAGE_ENHANCEMENT_PROMPT,
+        },
+        {
+          role: "user",
+          content: args.prompt,
+        },
+      ],
+    })
 
-//     return response.text;
-//   },
-// });
+    return response.text
+  },
+})
 
 export const create = mutation({
   args: {

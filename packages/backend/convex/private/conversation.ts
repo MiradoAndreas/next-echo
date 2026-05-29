@@ -24,7 +24,7 @@ export const updateStatus = mutation({
       })
     }
 
-    const orgId = identity.orgId as string
+    const orgId = (identity.o as any)?.id
 
     if (!orgId) {
       throw new ConvexError({
@@ -69,7 +69,7 @@ export const getOne = query({
       })
     }
 
-    const orgId = identity.orgId as string
+    const orgId = (identity.o as any)?.id
 
     if (!orgId) {
       throw new ConvexError({
@@ -131,19 +131,15 @@ export const getMany = query({
       })
     }
 
-    console.log("NEW IDENTITY = ", identity)
+    const orgId = (identity.o as any)?.id
 
-    const orgId = identity.orgId as string
-    console.log("ORGANISATION ID = ", orgId)
     if (!orgId) {
       console.log("Organization not found ")
       throw new ConvexError({
-        code: "UNAUTHORIZED",
+        code: "UNAUTHORIZIED",
         message: "Organization not found",
       })
     }
-
-    console.log("Tu es réussi à débugger cette fonction sur l'organisation Id")
 
     let conversations: PaginationResult<Doc<"conversations">>
 
